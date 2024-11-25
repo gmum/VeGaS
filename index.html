@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="VeGaS: Video Gaussian Splatting">
+  <meta name="keywords" content="Gaussian Splatting, Video, Reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VeGaS: Video Gaussian Splatting</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+
+  </script> -->
+  <style>
+  .hr {width: 100%; height: 1px; margin: 48px 0; background-color: #d6dbdf;}
+  </style>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- custom css file  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/twentytwenty.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop head">
+      <div class="columns is-centered">
+        <div class="column has-text-centered head">
+          <div class="logo">
+          <a href="index.html">
+          </a>
+          </div>
+          <br>
+
+          <h1 class="title is-3 publication-title"> 
+            <font color="#d13838">VeGaS</font>: Video Gaussian Splatting
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=3glCXHwAAAAJ&hl=en">Weronika Smolak-Dyżewska</a><sup>*</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=p9hxe6wAAAAJ">Dawid Malarz</a><sup>*</sup>,&nbsp;&nbsp;</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=7jli-TcAAAAJ">Kornel Howil</a><sup>*</sup>,&nbsp;&nbsp;</span> 
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=HP_2sDgAAAAJ">Marcin Mazur</a>,&nbsp;&nbsp;</span> 
+            <span class="author-block">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=0kp0MbgAAAAJ">Przemysław Spurek</a></span>
+              <span class="author-block">
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Jagiellonian University </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">*equal contribution</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="./xx.pdf" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2411.11024" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <!-- Code Link. -->
+              <span class="link-block"> 
+                <a href="https://github.com/gmum/VeGaS" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- first row -->
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object Edition</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/blackswan_orig.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/blackswan_scale.mp4" type="video/mp4">
+              </video> 
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Changing object opacity</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/horsejump_high_orig.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/horse_vanishing.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Object copying</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/rollerblade_orig.mp4" type="video/mp4">
+              </video> 
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/rollerblade_copy.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+     
+        <div class="item">
+          <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+            <div class="desc">Frame interpolation</div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/render_org_10fps.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video">
+              <video muted autoplay="autoplay" loop="loop" width="100%">
+                <source src="./assets/videos/render_interpolation_30fps.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+
+          <div class="item">
+            <div class="twentytwenty-container" data-orientation="horizontal" ratio="0.5556">
+              <div class="desc">Object Edition</div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/mallard_water_orig.mp4" type="video/mp4">
+                </video> 
+              </div>
+              <div class="video">
+                <video muted autoplay="autoplay" loop="loop" width="100%">
+                  <source src="./assets/videos/mallard_water_sine.mp4" type="video/mp4">
+                </video> 
+              </div>
+            </div>
+          </div>
+  
+
+      </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+      <!-- <div class="column"> -->
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Implicit Neural Representations (INRs) employ neural networks to approximate discrete data as continuous functions. 
+            In the context of video data, such models can be utilized to transform the coordinates of pixel locations along with frame occurrence times (or indices) into RGB color values. 
+            Although INRs facilitate effective compression, they are unsuitable for editing purposes. 
+            One potential solution is to use a 3D Gaussian Splatting (3DGS) based model, such as the Video Gaussian Representation (VGR), which is capable of encoding video as a multitude of 3D Gaussians and is applicable for numerous video processing operations, including editing. 
+            Nevertheless, in this case, the capacity for modification is constrained to a limited set of basic transformations. To address this issue, we introduce the Video Gaussian Splatting (VeGaS) model, which enables realistic modifications of video data. 
+            To construct VeGaS, we propose a novel family of Folded-Gaussian distributions designed to capture nonlinear dynamics in a video stream and model consecutive frames by 2D Gaussians obtained as respective conditional distributions. 
+            Our experiments demonstrate that VeGaS outperforms state-of-the-art solutions in frame reconstruction tasks and allows realistic modifications of video data.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+    <!--/ Abstract. -->
+    <div class="column is-centered ">
+      <img src="./assets/images/method.png" />
+    </div>
+  </div>
+  
+</section>
+
+
+<section class="section">
+  <div class="container is-fullhd has-text-centered">
+    <h2 class="title is-3">Visual Comparisons For Frame Reconstruction</h2>
+    <div class="content has-text-justified">
+      <p></p>
+    </div>
+    <div class="columns is-centered">
+      <!-- Visual Effects -->
+      <div class="column is-half">
+        <div class="content">
+          <div id="example1" class="bal-container-small">
+            <div class="bal-after">
+              <img src="assets/images/vegas.png" alt="Ours" width="660" height="600">
+              <div class="bal-afterPosition afterLabel">
+                Ours
+              </div>
+            </div>
+            <div class="bal-before">
+              <div class="bal-before-inset">
+                <img src="assets/images/gt.jpg" alt="VGR"  width="660" height="600">
+                <div class="bal-beforePosition beforeLabel">
+                  Ground Truth
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <div class="content">
+          <div id="example2" class="bal-container-small">
+            <div class="bal-after">
+              <img src="assets/images/vegas.png" alt="Difference Ours">
+              <div class="bal-afterPosition afterLabel">
+                Ours 
+              </div>
+            </div>
+            <div class="bal-before">
+              <div class="bal-before-inset">
+                <img src="assets/images/vgr.jpg" alt="Difference VGR">
+                <div class="bal-beforePosition beforeLabel">
+                  VGR [sun2024splatter] 
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="content">
+          <div id="example4" class="bal-container-small">
+            <div class="bal-after">
+              <img src="assets/images/diff_vegas.jpg" alt="Difference Ours">
+              <div class="bal-afterPosition afterLabel">
+                Ours (difference GT vs VeGaS)
+              </div>
+            </div>
+            <div class="bal-before">
+              <div class="bal-before-inset">
+                <img src="assets/images/diff_vgr.jpg" alt="Difference VGR">
+                <div class="bal-beforePosition beforeLabel">
+                  VGR [sun2024splatter] (difference GT vs VGR)
+                </div>
+              </div>
+            </div>
+            <div class="bal-handle">
+              <span class="handle-left-arrow"></span>
+              <span class="handle-right-arrow"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{smolakdyżewska2024vegasvideogaussiansplatting,
+      title={VeGaS: Video Gaussian Splatting}, 
+      author={Weronika Smolak-Dyżewska and Dawid Malarz and Kornel Howil and Jan Kaczmarczyk and Marcin Mazur and Przemysław Spurek},
+      year={2024},
+      eprint={2411.11024},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2411.11024}, 
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://arxiv.org/pdf/2411.11024" target="_blank">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/gmum/VeGaS" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <div class="columns is-centered"><p>
+            This website is based on this website's <a href="https://github.com/sczhou/ProPainter_website" target="_blank">source code</a>. 
+            It's template is based on <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">this</a>. 
+            Thank you!
+          </p></div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</footer>
+
+  <!-- custom js file  -->
+  <!-- <script defer src="./assets/js/fontawesome.all.min.js"></script> -->
+  <script src="./assets/js/bulma-carousel.min.js"></script>
+  <script src="./assets/js/bulma-slider.min.js"></script>
+  <script src="./assets/js/index.js"></script>
+  <script src="./assets/js/jquery.event.move.js"></script>
+  <script src="./assets/js/jquery.twentytwenty.js"></script>
+  <script src="./assets/js/jquery.twentytwentysingle.js"></script>
+  <script>
+  $(function(){
+    $(".twentytwenty-container").twentytwenty();
+    // $(".twentytwenty-container", "#results-carousel").twentytwenty({default_offset_pct: 0.5, ratio: 0.5});
+  });
+  </script>
+  <script src="assets/js/script.js"></script>
+
+  <script>
+      new BeforeAfter({
+          id: '#example1'
+      });
+      new BeforeAfter({
+          id: '#example2'
+      });
+      new BeforeAfter({
+          id: '#example4'
+      });
+  </script>
+</body>
+</html>
