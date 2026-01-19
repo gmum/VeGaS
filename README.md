@@ -163,7 +163,6 @@ If you find our work useful, please consider citing:
       url = {https://www.sciencedirect.com/science/article/pii/S0020025525011703},
       author = {Weronika Smolak-Dyżewska and Dawid Malarz and Kornel Howil and Jan Kaczmarczyk and Marcin Mazur and Przemysław Spurek}
       }
-}
 </code></pre>
 
 </div>
