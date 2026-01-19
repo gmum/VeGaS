@@ -152,14 +152,17 @@ If you find our work useful, please consider citing:
 <h3 class="title">VeGaS: Video Gaussian Splatting
 
 </h3>
-    <pre><code>@Article{2024vegas,
-      author={Weronika Smolak-Dyżewska and Dawid Malarz and Kornel Howil and Jan Kaczmarczyk and Marcin Mazur and Przemysław Spurek},
-      title={VeGaS: Video Gaussian Splatting},
-      year={2024},
-      eprint={2411.11024},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2411.11024}, 
+    <pre><code>@article{2025vegas,
+      title = {VeGaS: Video Gaussian Splatting},
+      journal = {Information Sciences},
+      volume = {735},
+      pages = {123033},
+      year = {2026},
+      issn = {0020-0255},
+      doi = {https://doi.org/10.1016/j.ins.2025.123033},
+      url = {https://www.sciencedirect.com/science/article/pii/S0020025525011703},
+      author = {Weronika Smolak-Dyżewska and Dawid Malarz and Kornel Howil and Jan Kaczmarczyk and Marcin Mazur and Przemysław Spurek}
+      }
 }
 </code></pre>
 
